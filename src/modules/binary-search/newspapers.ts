@@ -9,10 +9,6 @@ function feasible(
   let time = 0
   let numWorkers = 0
 
-  console.log({
-    mid,
-  })
-
   for (const readTime of newspapersReadTimes) {
     if (time + readTime > mid) {
       time = 0
