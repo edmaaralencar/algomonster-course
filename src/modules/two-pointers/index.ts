@@ -1,1 +1,1 @@
-import './remove-duplicates.ts'
+import './move-zeros.ts'

@@ -1,1 +1,1 @@
-import './newspapers.ts'
+import './my-calendar.ts'
