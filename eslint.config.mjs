@@ -23,6 +23,7 @@ export default defineConfig([
     },
     rules: {
       'simple-import-sort/imports': 'error',
+      'prefer-const': 'off',
       'prettier/prettier': [
         'error',
         {

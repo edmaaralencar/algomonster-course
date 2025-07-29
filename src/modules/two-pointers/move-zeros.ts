@@ -8,7 +8,7 @@ function moveZeros(nums: number[]) {
     }
   }
 
-  return nums
+  return -1
 }
 
 const input = [1, 0, 2, 0, 0, 7]

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 class Node<T> {
   val: T
   next: Node<T> | null
@@ -7,16 +8,16 @@ class Node<T> {
   }
 }
 
-function middleOfLinkedList(head: Node<number> | null): Node<number> | null {
+function middleOfLinkedList(head: any): number {
   let fast = head
-  let middle = head
+  let slow = head
 
-  while (fast && fast.next) {
+  while (fast && fast?.next) {
     fast = fast.next.next
-    middle = middle?.next ?? null
+    slow = slow?.next
   }
 
-  return middle
+  return slow?.val
 }
 
 // function middleOfLinkedListSecond(head: Node<number> | null) {
