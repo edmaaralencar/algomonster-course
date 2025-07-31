@@ -1,4 +1,4 @@
-function productExceptSelf(nums: number[]): number[] {
+function productExceptSelf(nums: number[]) {
   const prefix = new Array(nums.length).fill(1)
   const suffix = new Array(nums.length).fill(1)
 

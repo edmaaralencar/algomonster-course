@@ -1,20 +1,25 @@
 function longestOnes(nums: number[], k: number): number {
   let left = 0
+  let maxLength = 0
   let zeroCount = 0
-  let max = 0
 
   for (let right = 0; right < nums.length; right++) {
-    if (nums[right] === 0) zeroCount++
+    if (nums[right] === 0) {
+      zeroCount++
+    }
 
-    if (zeroCount > k) {
-      if (nums[left] === 0) zeroCount--
+    while (zeroCount > k) {
+      if (nums[left] === 0) {
+        zeroCount--
+      }
+
       left++
     }
 
-    max = Math.max(max, right - left + 1)
+    maxLength = Math.max(maxLength, right - left + 1)
   }
 
-  return max
+  return maxLength
 }
 
 // const nums = [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1]
