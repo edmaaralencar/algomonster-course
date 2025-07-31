@@ -1,47 +1,53 @@
 function findAllAnagrams(original: string, check: string) {
-  function equals(arr1: number[], arr2: number[]): boolean {
-    return (
-      arr1.length === arr2.length && arr1.every((val, i) => val === arr2[i])
-    )
+  const checkFrequency: Record<string, number> = {}
+  const windowFrequency: Record<string, number> = {}
+
+  for (let i = 0; i < check.length; i++) {
+    checkFrequency[check[i]] = (checkFrequency[check[i]] ?? 0) + 1
   }
 
-  const originalLen = original.length
-  const checkLen = check.length
-  if (originalLen < checkLen) return []
+  const results = []
 
-  const res = []
-  const checkCounter = Array(26).fill(0)
-  const window = Array(26).fill(0)
-  const a = 'a'.charCodeAt(0) // ascii value of 'a'
+  function areWindowsEqual(
+    check: Record<string, number>,
+    window: Record<string, number>,
+  ) {
+    const checkList = Object.keys(check)
+    const windowList = Object.keys(window)
 
-  console.log({
-    a,
-  })
+    if (checkList.length !== windowList.length) return false
 
-  for (let i = 0; i < checkLen; i++) {
-    checkCounter[check.charCodeAt(i) - a]++
-    window[original.charCodeAt(i) - a]++
+    for (const key of checkList) {
+      if (check[key] !== window[key]) {
+        return false
+      }
+    }
+
+    return true
   }
 
-  console.log({
-    checkCounter,
-    window,
-  })
+  for (let i = 0; i < original.length; i++) {
+    const char = original[i]
 
-  if (equals(window, checkCounter)) res.push(0)
+    windowFrequency[char] = (windowFrequency[char] ?? 0) + 1
 
-  for (let i = checkLen; i < originalLen; i++) {
-    window[original.charCodeAt(i - checkLen) - a]--
-    window[original.charCodeAt(i) - a]++
-    if (equals(window, checkCounter)) res.push(i - checkLen + 1)
+    if (i >= check.length) {
+      windowFrequency[original[i - check.length]] -= 1
+
+      if (windowFrequency[original[i - check.length]] === 0) {
+        delete windowFrequency[original[i - check.length]]
+      }
+    }
+
+    if (areWindowsEqual(checkFrequency, windowFrequency)) {
+      results.push(i - check.length + 1)
+    }
   }
 
-  console.log(res)
-
-  return []
+  return results
 }
 
-const original = 'abab'
-const check = 'ab'
+const original = 'cbaebabacd'
+const check = 'abc'
 
 console.log(findAllAnagrams(original, check))
