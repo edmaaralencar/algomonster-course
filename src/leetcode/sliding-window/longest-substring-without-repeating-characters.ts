@@ -2,7 +2,7 @@ function lengthOfLongestSubstring(s: string): number {
   let left = 0
   let maxLength = 0
 
-  const set = new Set<string>()
+  const set = new Set()
 
   for (let right = 0; right < s.length; right++) {
     while (set.has(s[right])) {
@@ -18,4 +18,6 @@ function lengthOfLongestSubstring(s: string): number {
   return maxLength
 }
 
-console.log(lengthOfLongestSubstring('pwwkew'))
+const s = 'abcabcbb'
+
+console.log(lengthOfLongestSubstring(s))
